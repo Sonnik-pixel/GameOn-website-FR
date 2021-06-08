@@ -9,7 +9,7 @@
 
 1. TODO : fermer la modale
 
-- [ ] Ajouter la fonctionnalité au bouton (x)
+- [x] Ajouter la fonctionnalité au bouton (x)
 
 2. Implémenter entrées du formulaire
 
