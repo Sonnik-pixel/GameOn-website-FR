@@ -7,6 +7,10 @@ function editNav() {
   }
 }
 
+// const regex
+const regexMail =
+  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
@@ -87,14 +91,14 @@ function checkFunctionNom() {
 
 //création de la function qui permettra de vérifier les paramètres de saisi pour le champ mail :
 function checkFunctionEmail() {
-  if (email.){
-
+  if (email.value.match(regexMail)) {
+    errorDisplayMail.classList.remove("show");
+  } else if (email.value.length === 0) {
+    errorDisplayMail.classList.remove("show");
   } else {
-
+    errorDisplayMail.classList.add("show");
   }
 }
-
-
 
 // launch modal form
 // ajout de classe show (visibility: visible;)
