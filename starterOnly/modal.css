@@ -21,6 +21,14 @@ body {
   margin: 0 auto;
 }
 
+/*error message*/
+
+.error-display-css {
+  visibility: hidden;
+  color: #ff4e60;
+  font-size: 0.8rem;
+}
+
 p {
   margin-bottom: 0;
   padding: 0.5vw;
@@ -394,7 +402,7 @@ input[data-error]::after {
 }
 
 /* Hide the modal when the select box is closed: */
-.modal-show {
+.show {
   visibility: visible;
 }
 

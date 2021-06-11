@@ -10,71 +10,107 @@ function editNav() {
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
-const closeBtn = document.getElementById("close");
 const formData = document.querySelectorAll(".formData");
+const closeBtn = document.getElementById("close");
+
+// 1) Je récupère les messages d'erreur pour ensuite les afficher via un ID unique dans ma SPAN :
+const errorDisplayPrenom = document.getElementById("error-display-prenom");
+const errorDisplayNom = document.getElementById("error-display-nom");
+const errorDisplayMail = document.getElementById("error-display-mail");
 
 // INPUT
-const first = document.getElementById("first");
-const last = document.getElementById("last");
+// 1) Première chose, il faut récupérer l'élement concerné (input) via un ID unique dans mon INPUT :
+const firstName = document.getElementById("first");
+console.log("c'est mon firstName", firstName);
+console.dir(firstName);
+const lastName = document.getElementById("last");
+console.dir(lastName);
 const email = document.getElementById("email");
 const birthdate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
 
-// launch modal event
-modalBtn.forEach((btn) => {
-  btn.addEventListener("click", launchModal);
-  console.log(btn);
-});
+// Initialisation des évents
+init();
 
-//close modal event
-// ajouter un écouteur sur la croix
-closeBtn.addEventListener("click", closeModal);
+// FUNCTION
 
-// launch modal form
-function launchModal() {
-  modalbg.classList.add("modal-show");
+// ajouter mes évènements au démarrage de l'applications, pas obligé de mettre dans une fonction.
+function init() {
+  // launch modal event
+  modalBtn.forEach((btn) => {
+    btn.addEventListener("click", launchModal);
+  });
+
+  //close modal event
+  // ajouter un écouteur sur la croix
+  closeBtn.addEventListener("click", closeModal);
+
+  // 2) évent qui permet d'écouter a chaque fois que j'écris une lettre dans l'input, j'écris d'abord ma constante (qui contient et désigne mon INPUT)
+  firstName.addEventListener("input", checkFunctionPrenom);
+  lastName.addEventListener("input", checkFunctionNom);
+  email.addEventListener("input", checkFunctionEmail);
 }
 
-//close modal form
-// lui dire dinjecter un style none
-// mais mauvaise technique, il faut créer une classe en display none
-// et lui dire de faire jouer cette classe
-
-function closeModal() {
-  modalbg.classList.remove("modal-show");
-}
-
-// CHECK
-
-// input first and last
-// Le champ Prénom / Nom a un minimum de 2 caractères / n'est pas vide.
-function check(prenom, nom) {
-  if (first.length < 2) {
-    return false;
-  } else if (first.length == 0) {
-    return false;
+// 3) création de la function qui permettra de vérifier le nombre de caractères pour prénom :
+function checkFunctionPrenom() {
+  // Je fais un console.log pour voir si mon étape 2 fonctionne bien
+  console.log("je tape actuellement dans l'input du prénom");
+  // Je veux vérifier SI il y a deux lettres minimun ou égal dans mon input SINON je retourne une erreur
+  if (firstName.value.length >= 2) {
+    console.log("valide");
+    errorDisplayPrenom.classList.remove("show");
+  } else if (firstName.value.length === 0) {
+    errorDisplayPrenom.classList.remove("show");
   } else {
-    return true;
+    console.log("attention il manque des lettres");
+    errorDisplayPrenom.classList.add("show");
   }
 }
 
-// input last
-// Le champ nom a un minimum de 2 caractères / n'est pas vide.
-// function checkLast() {
-//   if(last.length < 2) {
-//   return false;
-//   }
-//   else if(first.length == 0) {
-//     return false;
-//   }
-//  else {
-//  return true;
-//  }
-// }
-
-function myFunction(test) {
-  console.log(document.getElementById("first"));
-  console.dir(document.getElementById("first"));
-  console.log(document.getElementById("first").value.length);
-  console.log(test.value.length);
+// création de la function qui permettra de vérifier le nombre de caractères pour nom :
+function checkFunctionNom() {
+  // Je fais un console.log pour voir si mon étape 2 fonctionne bien
+  console.log("je tape actuellement dans l'input du nom");
+  // SI la taille de la valeur de mon nom est supérieur ou égal à 2 j'enlève la classe show qui me permet de monter mon message d'erreur.
+  if (lastName.value.length >= 2) {
+    console.log("valide");
+    errorDisplayNom.classList.remove("show");
+    // SINON SI la taille de la valeur de mon nom est strictement égal à 0 j'enlève la classe show qui me permet de montrer mon message d'erreur.
+  } else if (lastName.value.length === 0) {
+    errorDisplayNom.classList.remove("show");
+    // SINON tout le reste des autres cas de situation possible et inimaginable pouvaient se produire, dans ce cas là j'ajoute la classe show qui me permet d'afficher mon message d'erreur.
+  } else {
+    console.log("attention il manque des lettres");
+    errorDisplayNom.classList.add("show");
+  }
 }
+
+//création de la function qui permettra de vérifier les paramètres de saisi pour le champ mail :
+function checkFunctionEmail() {
+  if (email.){
+
+  } else {
+
+  }
+}
+
+
+
+// launch modal form
+// ajout de classe show (visibility: visible;)
+function launchModal() {
+  modalbg.classList.add("show");
+}
+
+//close modal form
+// suppression de classe show
+function closeModal() {
+  modalbg.classList.remove("show");
+}
+
+// function myFunction(test) {
+//   console.log(document.getElementById("first"));
+//   console.dir(document.getElementById("first"));
+//   console.log(document.getElementById("first").value.length);
+//   console.log(test.value.length);
+// }
