@@ -133,8 +133,10 @@ function checkFunctionBirthdate() {
 function checkFunctionTournois() {
   if (inputTournois.value <= 99){
     errorDisplayTournois.classList.remove("show");
+    return true;
   } else {
     errorDisplayTournois.classList.add("show");
+    return false;
   }
 }
 
