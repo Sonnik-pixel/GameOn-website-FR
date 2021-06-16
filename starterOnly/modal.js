@@ -23,6 +23,7 @@ const errorDisplayPrenom = document.getElementById("error-display-prenom",);
 const errorDisplayNom = document.getElementById("error-display-nom");
 const errorDisplayMail = document.getElementById("error-display-mail");
 const errorDisplayBirthdate = document.getElementById("error-display-naissance");
+const errorDisplayTournois = document.getElementById("error-display-tournois");
 
 // INPUT
 // 1) Première chose, il faut récupérer l'élement concerné (input) via un ID unique dans mon INPUT :
@@ -33,7 +34,7 @@ const inputLastName = document.getElementById("last");
 // console.dir(lastName);
 const inputEmail = document.getElementById("email");
 const inputBirthdate = document.getElementById("birthdate");
-const quantity = document.getElementById("quantity");
+const inputTournois = document.getElementById("quantity");
 
 // Initialisation des évents
 init();
@@ -56,6 +57,7 @@ function init() {
   inputLastName.addEventListener("input", checkFunctionNom);
   inputEmail.addEventListener("input", checkFunctionEmail);
   inputBirthdate.addEventListener("input",checkFunctionBirthdate);
+  inputTournois.addEventListener("input", checkFunctionTournois);
   // validation.addEventListener("clic", checkForm);
 }
 
@@ -120,8 +122,21 @@ function checkFunctionEmail() {
 function checkFunctionBirthdate() {
   if (inputBirthdate.value.match(regexBirthdate)) {
     errorDisplayBirthdate.classList.remove("show");
+    inputBirthdate.classList.remove("border");
   } else {
     errorDisplayBirthdate.classList.add("show");
+    inputBirthdate.classList.add("border");
+  }
+}
+
+//création de la function qui permettra de vérifier les paramètres de saisi pour le champ tournois:
+function checkFunctionTournois() {
+  if (inputTournois.value.lenght <= 99){
+    errorDisplayTournois.classList.remove("show");
+  } else if(inputTournois.value.lenght === 0) {
+    errorDisplayTournois.classList.remove("show");
+  } else {
+    errorDisplayTournois.classList.add("show");
   }
 }
 
