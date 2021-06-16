@@ -95,7 +95,7 @@
                   name="email"
                 /><br>
               </div>
-              <span class="error-display-css" id="error-display-mail">Veuillez vérifiez votre adresse E-mail.</span>
+              <span class="error-display-css" id="error-display-mail">Veuillez entrer une adresse E-mail valide.</span>
               <div
                 class="formData">
                 <label for="birthdate">Date de naissance</label><br>
@@ -106,13 +106,13 @@
                   name="birthdate"
                 /><br>
               </div>
-              <span class="error-display-css">Vous devez entrer votre date de naissance.</span>
+              <span class="error-display-css" id="error-display-naissance">Veuillez entrer une date de naissance valide.</span>
               <div
                 class="formData">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
               </div>
-              <span class="error-display-css">Vous devez entrer un nombre.</span>
+              <span class="error-display-css">Veuillez entrer un nombre.</span>
               <p class="text-label">Quelles villes ?</p>
               <div
                 class="formData">
@@ -183,7 +183,7 @@
                   Portland</label
                 >
               </div>
-              <span class="error-display-css">Vous devez séléctionner une ville.</span>
+              <span class="error-display-css">Veuillez séléctionner une ville.</span>
               <div
                 class="formData">
                 <input
@@ -209,6 +209,7 @@
                 type="submit"
                 class="button"
                 value="C'est parti"
+                id="send-btn"
               />
             </form>
           </div>

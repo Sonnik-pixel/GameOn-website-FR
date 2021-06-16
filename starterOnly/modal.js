@@ -8,29 +8,31 @@ function editNav() {
 }
 
 // const regex
-const regexMail =
-  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const regexMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const regexBirthdate = /^(19|20)\d{2}[-](0?[1-9]|1[012])[-](0[1-9]|[12]\d|3[01])$/;
 
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeBtn = document.getElementById("close");
+// const validation = document.getElementById(send-btn);
 
 // 1) Je récupère les messages d'erreur pour ensuite les afficher via un ID unique dans ma SPAN :
-const errorDisplayPrenom = document.getElementById("error-display-prenom");
+const errorDisplayPrenom = document.getElementById("error-display-prenom",);
 const errorDisplayNom = document.getElementById("error-display-nom");
 const errorDisplayMail = document.getElementById("error-display-mail");
+const errorDisplayBirthdate = document.getElementById("error-display-naissance");
 
 // INPUT
 // 1) Première chose, il faut récupérer l'élement concerné (input) via un ID unique dans mon INPUT :
-const firstName = document.getElementById("first");
-console.log("c'est mon firstName", firstName);
-console.dir(firstName);
-const lastName = document.getElementById("last");
-console.dir(lastName);
-const email = document.getElementById("email");
-const birthdate = document.getElementById("birthdate");
+const inputFirstName = document.getElementById("first");
+// console.log("c'est mon firstName", firstName);
+// console.dir(firstName);
+const inputLastName = document.getElementById("last");
+// console.dir(lastName);
+const inputEmail = document.getElementById("email");
+const inputBirthdate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
 
 // Initialisation des évents
@@ -50,9 +52,11 @@ function init() {
   closeBtn.addEventListener("click", closeModal);
 
   // 2) évent qui permet d'écouter a chaque fois que j'écris une lettre dans l'input, j'écris d'abord ma constante (qui contient et désigne mon INPUT)
-  firstName.addEventListener("input", checkFunctionPrenom);
-  lastName.addEventListener("input", checkFunctionNom);
-  email.addEventListener("input", checkFunctionEmail);
+  inputFirstName.addEventListener("input", checkFunctionPrenom);
+  inputLastName.addEventListener("input", checkFunctionNom);
+  inputEmail.addEventListener("input", checkFunctionEmail);
+  inputBirthdate.addEventListener("input",checkFunctionBirthdate);
+  // validation.addEventListener("clic", checkForm);
 }
 
 // 3) création de la function qui permettra de vérifier le nombre de caractères pour prénom :
@@ -60,14 +64,20 @@ function checkFunctionPrenom() {
   // Je fais un console.log pour voir si mon étape 2 fonctionne bien
   console.log("je tape actuellement dans l'input du prénom");
   // Je veux vérifier SI il y a deux lettres minimun ou égal dans mon input SINON je retourne une erreur
-  if (firstName.value.length >= 2) {
+  if (inputFirstName.value.length >= 2) {
     console.log("valide");
+    // Si c'est good j'enlève le message d'erreur de ma span ainsi que la bordure rouge
     errorDisplayPrenom.classList.remove("show");
-  } else if (firstName.value.length === 0) {
+    inputFirstName.classList.remove("border");
+  } else if (inputFirstName.value.length === 0) {
+    // Sinon si la valeur est égale à 0 pareil
     errorDisplayPrenom.classList.remove("show");
+    inputFirstName.classList.remove("border");
   } else {
     console.log("attention il manque des lettres");
+    // Sinon j'affiche ma span et mon contour rouge
     errorDisplayPrenom.classList.add("show");
+    inputFirstName.classList.add("border");
   }
 }
 
@@ -76,28 +86,50 @@ function checkFunctionNom() {
   // Je fais un console.log pour voir si mon étape 2 fonctionne bien
   console.log("je tape actuellement dans l'input du nom");
   // SI la taille de la valeur de mon nom est supérieur ou égal à 2 j'enlève la classe show qui me permet de monter mon message d'erreur.
-  if (lastName.value.length >= 2) {
+  if (inputLastName.value.length >= 2) {
     console.log("valide");
     errorDisplayNom.classList.remove("show");
+    inputLastName.classList.remove("border");
     // SINON SI la taille de la valeur de mon nom est strictement égal à 0 j'enlève la classe show qui me permet de montrer mon message d'erreur.
-  } else if (lastName.value.length === 0) {
+  } else if (inputLastName.value.length === 0) {
     errorDisplayNom.classList.remove("show");
+    inputLastName.classList.remove("border");
     // SINON tout le reste des autres cas de situation possible et inimaginable pouvaient se produire, dans ce cas là j'ajoute la classe show qui me permet d'afficher mon message d'erreur.
   } else {
     console.log("attention il manque des lettres");
     errorDisplayNom.classList.add("show");
+    inputLastName.classList.add("border");
   }
 }
 
 //création de la function qui permettra de vérifier les paramètres de saisi pour le champ mail :
 function checkFunctionEmail() {
-  if (email.value.match(regexMail)) {
+  if (inputEmail.value.match(regexMail)) {
     errorDisplayMail.classList.remove("show");
-  } else if (email.value.length === 0) {
+    inputEmail.classList.remove("border");
+  } else if (inputEmail.value.length === 0) {
     errorDisplayMail.classList.remove("show");
+    inputEmail.classList.remove("border");
   } else {
     errorDisplayMail.classList.add("show");
+    inputEmail.classList.add("border");
   }
+}
+
+//création de la function qui permettra de vérifier les paramètres de saisi pour le champ naissance :
+function checkFunctionBirthdate() {
+  if (inputBirthdate.value.match(regexBirthdate)) {
+    errorDisplayBirthdate.classList.remove("show");
+  } else {
+    errorDisplayBirthdate.classList.add("show");
+  }
+}
+
+
+
+// création dde la function qui permettra de valider tout le formulaire avant l'envoi :
+function checkForm(){
+
 }
 
 // launch modal form
