@@ -131,9 +131,7 @@ function checkFunctionBirthdate() {
 
 //création de la function qui permettra de vérifier les paramètres de saisi pour le champ tournois:
 function checkFunctionTournois() {
-  if (inputTournois.value.lenght <= 99){
-    errorDisplayTournois.classList.remove("show");
-  } else if(inputTournois.value.lenght === 0) {
+  if (inputTournois.value <= 99){
     errorDisplayTournois.classList.remove("show");
   } else {
     errorDisplayTournois.classList.add("show");
