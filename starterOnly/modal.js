@@ -144,6 +144,11 @@ function checkFunctionTournois() {
 
 // création dde la function qui permettra de valider tout le formulaire avant l'envoi :
 function checkForm(){
+  if (inputFirstName.value = "true" && inputLastName.value = "true") {
+    return true;
+  } else {
+    return false;
+  }
 
 }
 
