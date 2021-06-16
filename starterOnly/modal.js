@@ -81,7 +81,7 @@ function checkFunctionPrenom() {
   }
 }
 
-// création de la function qui permettra de vérifier le nombre de caractères pour nom :
+/// création de la function qui permettra de vérifier le nombre de caractères pour nom :
 function checkFunctionNom() {
   // Je fais un console.log pour voir si mon étape 2 fonctionne bien
   console.log("je tape actuellement dans l'input du nom");
