@@ -1,0 +1,167 @@
+function editNav() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+
+// DOM Elements
+const modalbg = document.querySelector(".bground");
+const modalBtn = document.querySelectorAll(".modal-btn");
+const formData = document.querySelectorAll(".formData");
+const closeBtn = document.getElementById("close");
+
+// CONST Regex
+//Ne peut pas contenir de chiffres mais espace et caractères spéciaux + au minimumu deux caractères//
+const regexText = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{1,}$/;
+const regexMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//Prend en compte les années bissextiles
+const regexBirthdate = /^(19|20)\d{2}[-](0?[1-9]|1[012])[-](0[1-9]|[12]\d|3[01])$/;
+
+//FORM Elements
+
+//Pour écouter sur un élement dom de ma page il faut le cibler (inputTexte via document.getElementBy)et ensuite appliquer un addEventlistener puis
+//choisir l'évenement (click, submit, onkeyup) 1er argument et mettre en deuxième argument une function.
+
+// inputTexte.addEventListener("evenement",maFunction(event));
+
+
+// function maFunction() {  ma function est équivalente à ça : () => {}
+//     alert('coucou');
+// }
+
+// Function pour valider le champ texte (séléctionne le champ prénom et nom)
+// pour création de nouvelle fonction changer le paramètre (inputMail)
+function validerChampTexte(inputTexte) {
+    // console.log(inputTexte.value);
+    // (inputTexte.value.length <= 1 || false == inputTexte.value.match)
+    if (!inputTexte.value.match(regexText)) {
+        inputTexte.closest('.formField').classList.add("hasError");
+        return;
+    }
+    inputTexte.closest('.formField').classList.remove("hasError");
+    // console.log(inputTexte.value);
+}
+
+// Function pour valider le champ mail
+function validerChampMail(inputMail) {
+    // console.log(inputMail.value);
+    if (!inputMail.value.match(regexMail)) {
+        inputMail.closest('.formField').classList.add("hasError");
+        return;
+    }
+    inputMail.closest('.formField').classList.remove("hasError");
+}
+
+// Function pour valider le champ Anniversaire
+function validerChampBirthdate(inputBirthdate) {
+    // Récupère la date au format année-mois-jour
+    // console.log(inputBirthdate.value);
+    if (!inputBirthdate.value.match(regexBirthdate)) {
+        inputBirthdate.closest('.formField').classList.add("hasError");
+        return;
+    }
+    inputBirthdate.closest('.formField').classList.remove("hasError");
+}
+
+// Function pour valider le champ Quantity
+function validerChampQuantity(inputQuantity) {
+    // console.log(inputQuantity.value);
+    if (inputQuantity.value < 1) {
+        inputQuantity.closest('.formField').classList.add("hasError");
+        return;
+    }
+    inputQuantity.closest('.formField').classList.remove("hasError");
+}
+
+// const locationChecked = document.querySelectorAll("input[data-validator=location]:checked");
+//  console.log(document.querySelectorAll("input[data-validator=location]"));
+// Function pour valider le champ Location
+function validerChampLocation(inputLocation) {
+    // inputLocation affiche tous les inputs de toutes les villes <input data-va....>
+    // console.log(inputLocation);
+    //inputLocation.checked affiche tous les checked si false ou true
+    console.log(inputLocation.checked);
+    //inputLocation affiche toutes les valeurs des villes New York San Franciso ....
+    //console.log(inputLocation.value);
+
+    if (inputLocation.checked != true) {
+        inputLocation.closest('.formField').classList.add("hasError");
+        return;
+    }
+    inputLocation.closest('.formField').classList.remove("hasError");
+}
+
+
+//je récupère via l'id unique, mon formulaire FORM et j'ajoute un écouteur (sur submit premier paramètre puis deuxième paramètre, (event) est la paramètre de ma deuxième function)
+document.getElementById("formReservation").addEventListener("submit",(event) => {
+    //permet de couper l'action submit de mon formulaire
+    event.preventDefault();
+    // console.log('coucou');
+
+
+    // Je séléctionne tous les éléments qui ont l'attribut data-validator que je met dans la constante formFields (Nodelist avec tous mes input)
+    const formFields = document.querySelectorAll("[data-validator]");
+
+
+
+    // pour chaque champs du formulaire je récupère mon élement
+    formFields.forEach((champFormulaire) => {
+        // je stock la valeur de data-validator (text, email, birthdate, quantity, location, checkbox)
+        const validatorType = champFormulaire.dataset.validator;
+        // console.log(validatorType);
+        // l’instruction switch représente une alternative à l’utilisation d’un if…else if…else.
+        switch (validatorType) {
+            case 'text':
+                validerChampTexte(champFormulaire);
+                break;
+            case 'email':
+                validerChampMail(champFormulaire);
+                break;
+            case 'birthdate':
+                validerChampBirthdate(champFormulaire);
+                break;
+            case 'quantity':
+                validerChampQuantity(champFormulaire);
+                break;
+            case 'location':
+                validerChampLocation(champFormulaire);
+                break;
+        }
+    });
+
+});
+
+
+
+
+
+// Initialisation des évents
+// Permet d'executer ma function Init, il faut créer une function ok mais ensuite il faut penser à la lancer !
+init();
+
+function init() {
+    // launch modal event
+    modalBtn.forEach((btn) => {
+        btn.addEventListener("click",launchModal);
+    });
+
+    //close modal event
+    // ajouter un écouteur sur la croix
+    closeBtn.addEventListener("click",closeModal);
+}
+
+// launch modal form
+// ajout de classe show (visibility: visible;)
+function launchModal() {
+    modalbg.classList.add("show");
+}
+
+//close modal form
+// suppression de classe show
+function closeModal() {
+    modalbg.classList.remove("show");
+}
+

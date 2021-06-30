@@ -71,15 +71,18 @@ function checkFunctionPrenom() {
     // Si c'est good j'enlève le message d'erreur de ma span ainsi que la bordure rouge
     errorDisplayPrenom.classList.remove("show");
     inputFirstName.classList.remove("border");
+    return true;
   } else if (inputFirstName.value.length === 0) {
     // Sinon si la valeur est égale à 0 pareil
     errorDisplayPrenom.classList.remove("show");
     inputFirstName.classList.remove("border");
+    return false;
   } else {
     console.log("attention il manque des lettres");
     // Sinon j'affiche ma span et mon contour rouge
     errorDisplayPrenom.classList.add("show");
     inputFirstName.classList.add("border");
+    return false;
   }
 }
 
@@ -92,15 +95,18 @@ function checkFunctionNom() {
     console.log("valide");
     errorDisplayNom.classList.remove("show");
     inputLastName.classList.remove("border");
+    return true;
     // SINON SI la taille de la valeur de mon nom est strictement égal à 0 j'enlève la classe show qui me permet de montrer mon message d'erreur.
   } else if (inputLastName.value.length === 0) {
     errorDisplayNom.classList.remove("show");
     inputLastName.classList.remove("border");
+    return false;
     // SINON tout le reste des autres cas de situation possible et inimaginable pouvaient se produire, dans ce cas là j'ajoute la classe show qui me permet d'afficher mon message d'erreur.
   } else {
     console.log("attention il manque des lettres");
     errorDisplayNom.classList.add("show");
     inputLastName.classList.add("border");
+    return false;
   }
 }
 
@@ -109,12 +115,15 @@ function checkFunctionEmail() {
   if (inputEmail.value.match(regexMail)) {
     errorDisplayMail.classList.remove("show");
     inputEmail.classList.remove("border");
+    return true;
   } else if (inputEmail.value.length === 0) {
     errorDisplayMail.classList.remove("show");
     inputEmail.classList.remove("border");
+    return false;
   } else {
     errorDisplayMail.classList.add("show");
     inputEmail.classList.add("border");
+    return false;
   }
 }
 
@@ -123,9 +132,11 @@ function checkFunctionBirthdate() {
   if (inputBirthdate.value.match(regexBirthdate)) {
     errorDisplayBirthdate.classList.remove("show");
     inputBirthdate.classList.remove("border");
+    return true;
   } else {
     errorDisplayBirthdate.classList.add("show");
     inputBirthdate.classList.add("border");
+    return false;
   }
 }
 
@@ -134,23 +145,30 @@ function checkFunctionTournois() {
   if (inputTournois.value <= 99){
     errorDisplayTournois.classList.remove("show");
     return true;
-  } else {
+  } 
     errorDisplayTournois.classList.add("show");
     return false;
-  }
+  
 }
 
 
 
-// création dde la function qui permettra de valider tout le formulaire avant l'envoi :
-function checkForm(){
-  if (inputFirstName.value = "true" && inputLastName.value = "true") {
-    return true;
-  } else {
-    return false;
-  }
+// création de la function qui permettra de valider tout le formulaire avant l'envoi :
 
+function isValide () {
+  validateurs = [
+    checkFunctionPrenom(),
+    checkFunctionNom(),
+    checkFunctionEmail(),
+    checkFunctionBirthdate(),
+    checkFunctionTournois(),
+  ]
+
+  return validateurs.every((validateur) => {
+    return true === validateur;
+  });
 }
+
 
 // launch modal form
 // ajout de classe show (visibility: visible;)

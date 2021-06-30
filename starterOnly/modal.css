@@ -219,7 +219,7 @@ input {
   font-size: 20px;
   height: 48px;
 }
-.formData[data-error]::after {
+/* .formData[data-error]::after {
   content: attr(data-error);
   font-size: 0.4em;
   color: #e54858;
@@ -236,11 +236,13 @@ input {
 }
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
-}
+} */
 
-.border {
+
+
+/* .border {
   border: 2px solid #e54858;
-}
+} */
 
 /* 
 input[data-error]::after {
@@ -248,6 +250,23 @@ input[data-error]::after {
     font-size: 0.4em;
     color: red;
 } */
+
+/*pour cacher ma SPAN d'error*/
+.formField .message {
+  display: none;
+  font-size: 0.8rem;
+  color: red;
+}
+/*pour afficher ma SPAN d'error*/
+.formField.hasError .message{
+  display: block;
+}
+/*pour ajouter mon border ROUGE*/
+.formField.hasError input {
+  border: 2px solid red;
+}
+
+
 .checkbox-label,
 .checkbox2-label {
   position: relative;
