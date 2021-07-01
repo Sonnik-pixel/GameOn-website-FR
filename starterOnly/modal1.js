@@ -76,22 +76,49 @@ function validerChampQuantity(inputQuantity) {
     inputQuantity.closest('.formField').classList.remove("hasError");
 }
 
-// const locationChecked = document.querySelectorAll("input[data-validator=location]:checked");
-//  console.log(document.querySelectorAll("input[data-validator=location]"));
+//   console.log(document.querySelectorAll("input[data-validator=location]:checked").length);
 // Function pour valider le champ Location
 function validerChampLocation(inputLocation) {
     // inputLocation affiche tous les inputs de toutes les villes <input data-va....>
     // console.log(inputLocation);
     //inputLocation.checked affiche tous les checked si false ou true
-    console.log(inputLocation.checked);
+    // console.log(inputLocation.checked);
     //inputLocation affiche toutes les valeurs des villes New York San Franciso ....
     //console.log(inputLocation.value);
-
-    if (inputLocation.checked != true) {
+    const locationChecked = document.querySelectorAll("input[data-validator=location]:checked").length;
+    if (locationChecked !== 1) {
         inputLocation.closest('.formField').classList.add("hasError");
         return;
     }
     inputLocation.closest('.formField').classList.remove("hasError");
+}
+
+// Function pour valider le champ Checkbox
+function validerChampCheckbox(inputCheckbox) {
+    // console.log(inputQuantity.value);
+    // flase est pas coché, ==== strictement égal à false=0 true=1
+    if (inputCheckbox.checked === false) {
+        console.log(inputCheckbox.checked);
+        inputCheckbox.closest('.formField').classList.add("hasError");
+        return;
+    }
+    inputCheckbox.closest('.formField').classList.remove("hasError");
+}
+
+//Function pour valider tous les champs si strictement égal à 0
+//La propriété Element.innerHTML de Element récupère ou définit la syntaxe HTML décrivant les descendants de l'élément.
+//Permet de remplacer aisément le contenu existant d'un élément par un nouveau contenu donc efface tous les élements enfants (oldForm)
+function formIsValid() {
+    console.log(document.querySelectorAll('.formField.hasError'));
+    const isValid = document.querySelectorAll('.formField.hasError').length;
+    console.log(isValid);
+    if(isValid === 0) {
+    const form = document.getElementById("formReservation"); 
+    console.log(form);
+    form.innerHTML =`<div class="victory"><h1>Merci ! Votre réservation a été reçue.</h1>
+    <div class="wrapper-btn"><button id="btn-close" class="btn-submit">Fermer</button></div></div>`
+
+    }
 }
 
 
@@ -129,9 +156,16 @@ document.getElementById("formReservation").addEventListener("submit",(event) => 
             case 'location':
                 validerChampLocation(champFormulaire);
                 break;
+            case 'checkbox':
+                validerChampCheckbox(champFormulaire);
+                break;
         }
     });
-
+    formIsValid();
+    const btnClose = document.getElementById("btn-close");
+    btnClose.addEventListener("click", (event) => {
+        closeModal();
+    });
 });
 
 

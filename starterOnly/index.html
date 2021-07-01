@@ -23,7 +23,7 @@
       <a href="#"><span>À propos</span></a>
       <a href="#"><span>Contact</span></a>
       <a href="#"><span>Évènements passés</span></a>
-      <a href="javascript:void(0);" class="icon" onclick="editNav()">
+      <a href="javascript:void(0);" class="icon" onclick="editNav()"></a>
         <i class="fa fa-bars"></i>
       </a>
     </div>
@@ -71,6 +71,7 @@
                   type="text"
                   id="first"
                   name="first"
+                  placeholder="Tōru"
                 />
                 <span class="message">Veuillez entrer 2 caractères ou plus pour le champ du Prénom.</span>
               </div>
@@ -83,6 +84,7 @@
                   type="text"
                   id="last"
                   name="last"
+                  placeholder="Iwatani"
                 />
                 <span class="message">Veuillez entrer 2 caractères ou plus pour le champ du Nom.</span>
               </div>
@@ -95,6 +97,7 @@
                   type="email"
                   id="email"
                   name="email"
+                  placeholder="toru.iwatani@gmail.com"
                 />
                 <!--<span class="error-display-css" id="error-display-mail">Veuillez entrer une adresse E-mail valide.</span>-->
                 <span class="message">Veuillez entrer une adresse E-mail valide.</span>
@@ -197,12 +200,13 @@
               <div
                 class="formField">
                 <input
+                  data-validator="checkbox"
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
                   name="checkbox"                
                 />
-                <label data-validator="checkbox" class="checkbox2-label" for="checkbox1" required>
+                <label class="checkbox2-label" for="checkbox1" required>
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
@@ -212,7 +216,7 @@
                   <span class="checkbox-icon"></span>
                   Je Je souhaite être prévenu des prochains évènements.
                 </label>
-                
+                <span class="message">Veuillez accepter les conditions d'utilisation.</span>
               </div> 
               <input
                 class="btn-submit"
