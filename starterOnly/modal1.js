@@ -69,7 +69,7 @@ function validerChampBirthdate(inputBirthdate) {
 // Function pour valider le champ Quantity
 function validerChampQuantity(inputQuantity) {
     // console.log(inputQuantity.value);
-    if (inputQuantity.value < 1) {
+    if (inputQuantity.value < 1 || inputQuantity.value >= 100) {
         inputQuantity.closest('.formField').classList.add("hasError");
         return;
     }
@@ -96,7 +96,7 @@ function validerChampLocation(inputLocation) {
 // Function pour valider le champ Checkbox
 function validerChampCheckbox(inputCheckbox) {
     // console.log(inputQuantity.value);
-    // flase est pas coché, ==== strictement égal à false=0 true=1
+    // false est pas coché, ==== strictement égal à false=0 true=1
     if (inputCheckbox.checked === false) {
         console.log(inputCheckbox.checked);
         inputCheckbox.closest('.formField').classList.add("hasError");
@@ -117,10 +117,11 @@ function formIsValid() {
     console.log(form);
     form.innerHTML =`<div class="victory"><h1>Merci ! Votre réservation a été reçue.</h1>
     <div class="wrapper-btn"><button id="btn-close" class="btn-submit">Fermer</button></div></div>`
-
     }
 }
 
+// const validFdorm = document.createElement('div');
+// console.log(validFdorm);
 
 //je récupère via l'id unique, mon formulaire FORM et j'ajoute un écouteur (sur submit premier paramètre puis deuxième paramètre, (event) est la paramètre de ma deuxième function)
 document.getElementById("formReservation").addEventListener("submit",(event) => {
@@ -131,11 +132,12 @@ document.getElementById("formReservation").addEventListener("submit",(event) => 
 
     // Je séléctionne tous les éléments qui ont l'attribut data-validator que je met dans la constante formFields (Nodelist avec tous mes input)
     const formFields = document.querySelectorAll("[data-validator]");
-
+    console.log(formFields);
 
 
     // pour chaque champs du formulaire je récupère mon élement
     formFields.forEach((champFormulaire) => {
+        console.log(champFormulaire);
         // je stock la valeur de data-validator (text, email, birthdate, quantity, location, checkbox)
         const validatorType = champFormulaire.dataset.validator;
         // console.log(validatorType);
@@ -163,14 +165,18 @@ document.getElementById("formReservation").addEventListener("submit",(event) => 
     });
     formIsValid();
     const btnClose = document.getElementById("btn-close");
-    btnClose.addEventListener("click", (event) => {
+    btnClose.addEventListener("click",(event) => {
         closeModal();
+        // resetModal();
+        //
+        document.location.reload();
     });
 });
 
-
-
-
+// Function qui permet de reset le formulaire mais vu que je supprime avant mon innerHTML pas possible
+// function resetModal() {
+//     document.getElementById("formReservation").reset();
+// }
 
 // Initialisation des évents
 // Permet d'executer ma function Init, il faut créer une function ok mais ensuite il faut penser à la lancer !
@@ -194,7 +200,7 @@ function launchModal() {
 }
 
 //close modal form
-// suppression de classe show
+// suppression de classe show (plus visible)
 function closeModal() {
     modalbg.classList.remove("show");
 }
