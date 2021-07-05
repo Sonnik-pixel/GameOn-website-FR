@@ -13,6 +13,7 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeBtn = document.getElementById("close");
 
+
 // CONST Regex
 //Ne peut pas contenir de chiffres mais espace et caractères spéciaux + au minimumu deux caractères//
 const regexText = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{1,}$/;
@@ -168,7 +169,7 @@ document.getElementById("formReservation").addEventListener("submit",(event) => 
     btnClose.addEventListener("click",(event) => {
         closeModal();
         // resetModal();
-        //
+        // Permet de recharger la page, vide le formulaire mais mauvaise pratique
         document.location.reload();
     });
 });

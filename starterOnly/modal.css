@@ -23,11 +23,11 @@ body {
 
 /*error message*/
 
-.error-display-css {
+/* .error-display-css {
   visibility: hidden;
   color: #ff4e60;
   font-size: 0.8rem;
-}
+} */
 
 p {
   margin-bottom: 0;
@@ -109,7 +109,7 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
+    /*margin-top: -15px;*/
   }
 }
 
