@@ -8,14 +8,14 @@ function editNav() {
 }
 
 // DOM Elements
+// modalbg cible mon background & ajoute la class show pour le voir
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
 const closeBtn = document.getElementById("close");
 
 
 // CONST Regex
-//Ne peut pas contenir de chiffres mais espace et caractères spéciaux + au minimumu deux caractères//
+//Ne peut pas contenir de chiffres mais espace et caractères spéciaux + au minimum de deux caractères
 const regexText = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{1,}$/;
 const regexMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 //Prend en compte les années bissextiles
@@ -40,6 +40,7 @@ function validerChampTexte(inputTexte) {
     // (inputTexte.value.length <= 1 || false == inputTexte.value.match)
     if (!inputTexte.value.match(regexText)) {
         inputTexte.closest('.formField').classList.add("hasError");
+        // permet d'arrêter et de sorti de ma function
         return;
     }
     inputTexte.closest('.formField').classList.remove("hasError");
@@ -87,7 +88,9 @@ function validerChampLocation(inputLocation) {
     //inputLocation affiche toutes les valeurs des villes New York San Franciso ....
     //console.log(inputLocation.value);
     const locationChecked = document.querySelectorAll("input[data-validator=location]:checked").length;
-    if (locationChecked !== 1) {
+    // console.log(locationChecked);
+    // taille de ma nodeList
+    if (locationChecked === 0) {
         inputLocation.closest('.formField').classList.add("hasError");
         return;
     }
@@ -99,25 +102,26 @@ function validerChampCheckbox(inputCheckbox) {
     // console.log(inputQuantity.value);
     // false est pas coché, ==== strictement égal à false=0 true=1
     if (inputCheckbox.checked === false) {
-        console.log(inputCheckbox.checked);
+        // console.log(inputCheckbox.checked);
         inputCheckbox.closest('.formField').classList.add("hasError");
         return;
     }
     inputCheckbox.closest('.formField').classList.remove("hasError");
 }
 
-//Function pour valider tous les champs si strictement égal à 0
+//Function pour valider tous les champs si strictement égal à 0, je remplace mon formulaire par celui de validation.
 //La propriété Element.innerHTML de Element récupère ou définit la syntaxe HTML décrivant les descendants de l'élément.
 //Permet de remplacer aisément le contenu existant d'un élément par un nouveau contenu donc efface tous les élements enfants (oldForm)
 function formIsValid() {
-    console.log(document.querySelectorAll('.formField.hasError'));
+    // console.log(document.querySelectorAll('.formField.hasError'));
     const isValid = document.querySelectorAll('.formField.hasError').length;
-    console.log(isValid);
-    if(isValid === 0) {
-    const form = document.getElementById("formReservation"); 
-    console.log(form);
-    form.innerHTML =`<div class="victory"><h1>Merci ! Votre réservation a été reçue.</h1>
-    <div class="wrapper-btn"><button id="btn-close" class="btn-submit">Fermer</button></div></div>`
+    // affiche combiuen de message d'erreurs sont présent, de base 7.
+    // console.log(isValid);
+    if (isValid === 0) {
+        const form = document.getElementById("formReservation");
+        // console.log(form);
+        form.innerHTML = `<div class="victory"><h1>Merci ! Votre réservation a été reçue.</h1>
+        <div class="wrapper-btn"><button id="btn-close" class="btn-submit">Fermer</button></div></div>`
     }
 }
 
@@ -133,12 +137,13 @@ document.getElementById("formReservation").addEventListener("submit",(event) => 
 
     // Je séléctionne tous les éléments qui ont l'attribut data-validator que je met dans la constante formFields (Nodelist avec tous mes input)
     const formFields = document.querySelectorAll("[data-validator]");
-    console.log(formFields);
+    // console.log(formFields);
 
 
     // pour chaque champs du formulaire je récupère mon élement
     formFields.forEach((champFormulaire) => {
-        console.log(champFormulaire);
+        // champformulaire contient tout mes inputs
+        // console.log(champFormulaire);
         // je stock la valeur de data-validator (text, email, birthdate, quantity, location, checkbox)
         const validatorType = champFormulaire.dataset.validator;
         // console.log(validatorType);
@@ -187,6 +192,8 @@ function init() {
     // launch modal event
     modalBtn.forEach((btn) => {
         btn.addEventListener("click",launchModal);
+        // constante qui regroupe mes deux boutons je m'inscris, pour chaque boutons j'ajoute un ecouteur au clic et je lance ma function launchmodal.
+        //console.log(btn);
     });
 
     //close modal event
