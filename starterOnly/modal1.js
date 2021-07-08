@@ -115,7 +115,7 @@ function validerChampCheckbox(inputCheckbox) {
 function formIsValid() {
     // console.log(document.querySelectorAll('.formField.hasError'));
     const isValid = document.querySelectorAll('.formField.hasError').length;
-    // affiche combiuen de message d'erreurs sont présent, de base 7.
+    // affiche combien de message d'erreurs sont présents, de base 7.
     // console.log(isValid);
     if (isValid === 0) {
         const form = document.getElementById("formReservation");
@@ -176,6 +176,7 @@ document.getElementById("formReservation").addEventListener("submit",(event) => 
         // resetModal();
         // Permet de recharger la page, vide le formulaire mais mauvaise pratique
         document.location.reload();
+        // pour vider le formulaire je peux aussi faire input.value ="";
     });
 });
 
