@@ -167,8 +167,8 @@ main {
 }
 
 .bground {
-  visibility: hidden;
-  /*display: none;*/
+  /*visibility: hidden;*/
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -396,7 +396,8 @@ input {
 
 /* show modal */
 .show {
-  visibility: visible;
+  /*visibility: visible;*/
+  display: block;
 }
 
 .select-items div:hover,

@@ -1,3 +1,4 @@
+// function qui permet gérer le bouton de navigation en responsive
 function editNav() {
     var x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
@@ -8,9 +9,11 @@ function editNav() {
 }
 
 // DOM Elements
-// modalbg cible mon background & ajoute la class show pour le voir
+// modalbg cible mon background & ajoute la class show pour le voir et et le retire à la fermeture
 const modalbg = document.querySelector(".bground");
+// modalBtn cible mes deux boutons "je m'inscris"
 const modalBtn = document.querySelectorAll(".modal-btn");
+// closeBtn cible mon bouton de fermeture, la croix
 const closeBtn = document.getElementById("close");
 
 
@@ -36,7 +39,7 @@ const regexBirthdate = /^(19|20)\d{2}[-](0?[1-9]|1[012])[-](0[1-9]|[12]\d|3[01])
 // Function pour valider le champ texte (séléctionne le champ prénom et nom)
 // pour création de nouvelle fonction changer le paramètre (inputMail)
 function validerChampTexte(inputTexte) {
-    // console.log(inputTexte.value);
+     console.log(inputTexte);
     // (inputTexte.value.length <= 1 || false == inputTexte.value.match)
     if (!inputTexte.value.match(regexText)) {
         inputTexte.closest('.formField').classList.add("hasError");
@@ -60,7 +63,7 @@ function validerChampMail(inputMail) {
 // Function pour valider le champ Anniversaire
 function validerChampBirthdate(inputBirthdate) {
     // Récupère la date au format année-mois-jour
-    // console.log(inputBirthdate.value);
+     console.log(inputBirthdate.value);
     if (!inputBirthdate.value.match(regexBirthdate)) {
         inputBirthdate.closest('.formField').classList.add("hasError");
         return;
@@ -194,7 +197,7 @@ function init() {
     modalBtn.forEach((btn) => {
         btn.addEventListener("click",launchModal);
         // constante qui regroupe mes deux boutons je m'inscris, pour chaque boutons j'ajoute un ecouteur au clic et je lance ma function launchmodal.
-        //console.log(btn);
+        // console.log(btn);
     });
 
     //close modal event
@@ -202,13 +205,13 @@ function init() {
     closeBtn.addEventListener("click",closeModal);
 }
 
-// launch modal form
+// display background when modal form is open
 // ajout de classe show (visibility: visible;)
 function launchModal() {
     modalbg.classList.add("show");
 }
 
-//close modal form
+// display background when modal form is closed
 // suppression de classe show (plus visible)
 function closeModal() {
     modalbg.classList.remove("show");
