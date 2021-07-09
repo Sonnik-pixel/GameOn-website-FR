@@ -38,7 +38,7 @@ const regexBirthdate = /^(19|20)\d{2}[-](0?[1-9]|1[012])[-](0[1-9]|[12]\d|3[01])
 // Function pour valider le champ texte (séléctionne le champ prénom et nom)
 // pour création de nouvelle fonction changer le paramètre (inputMail)
 function validerChampTexte(inputTexte) {
-     console.log(inputTexte);
+    //  console.log(inputTexte);
     // (inputTexte.value.length <= 1 || false == inputTexte.value.match)
     if (!inputTexte.value.match(regexText)) {
         inputTexte.closest('.formField').classList.add("hasError");
@@ -53,7 +53,7 @@ function validerChampTexte(inputTexte) {
 
 // Function pour valider le champ mail
 function validerChampMail(inputMail) {
-     console.log(inputMail);
+    //  console.log(inputMail);
     if (!inputMail.value.match(regexMail)) {
         inputMail.closest('.formField').classList.add("hasError");
         return;
@@ -64,7 +64,7 @@ function validerChampMail(inputMail) {
 // Function pour valider le champ Anniversaire
 function validerChampBirthdate(inputBirthdate) {
     // Récupère la date au format année-mois-jour
-     console.log(inputBirthdate.value);
+    //  console.log(inputBirthdate.value);
     if (!inputBirthdate.value.match(regexBirthdate)) {
         inputBirthdate.closest('.formField').classList.add("hasError");
         return;
@@ -137,7 +137,7 @@ document.getElementById("formReservation").addEventListener("submit",(event) => 
     console.log(event);
     //permet de couper l'action submit de mon formulaire
     event.preventDefault();
-    // console.log('coucou');
+
     // Je séléctionne tous les éléments qui ont l'attribut data-validator que je met dans la constante formFields (Nodelist avec tous mes input)
     const formFields = document.querySelectorAll("[data-validator]");
     // console.log(formFields);
