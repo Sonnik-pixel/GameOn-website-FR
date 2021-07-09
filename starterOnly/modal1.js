@@ -21,7 +21,6 @@ const closeBtn = document.getElementById("close");
 //Ne peut pas contenir de chiffres mais espace et caractères spéciaux + au minimum de deux caractères
 const regexText = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{1,}$/;
 const regexMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//Prend en compte les années bissextiles
 const regexBirthdate = /^(19|20)\d{2}[-](0?[1-9]|1[012])[-](0[1-9]|[12]\d|3[01])$/;
 
 //FORM Elements
@@ -43,6 +42,8 @@ function validerChampTexte(inputTexte) {
     // (inputTexte.value.length <= 1 || false == inputTexte.value.match)
     if (!inputTexte.value.match(regexText)) {
         inputTexte.closest('.formField').classList.add("hasError");
+        // Autre technique, renvoie le plus proche ancêtre qui n'est pas un input, ma div formfield.
+        // console.log(inputTexte.closest(":not(input)"))
         // permet d'arrêter et de sorti de ma function
         return;
     }
@@ -52,7 +53,7 @@ function validerChampTexte(inputTexte) {
 
 // Function pour valider le champ mail
 function validerChampMail(inputMail) {
-    // console.log(inputMail.value);
+     console.log(inputMail);
     if (!inputMail.value.match(regexMail)) {
         inputMail.closest('.formField').classList.add("hasError");
         return;
@@ -133,16 +134,13 @@ function formIsValid() {
 
 //je récupère via l'id unique, mon formulaire FORM et j'ajoute un écouteur (sur submit premier paramètre puis deuxième paramètre, (event) est la paramètre de ma deuxième function)
 document.getElementById("formReservation").addEventListener("submit",(event) => {
+    console.log(event);
     //permet de couper l'action submit de mon formulaire
     event.preventDefault();
     // console.log('coucou');
-
-
     // Je séléctionne tous les éléments qui ont l'attribut data-validator que je met dans la constante formFields (Nodelist avec tous mes input)
     const formFields = document.querySelectorAll("[data-validator]");
     // console.log(formFields);
-
-
     // pour chaque champs du formulaire je récupère mon élement
     formFields.forEach((champFormulaire) => {
         // champformulaire contient tout mes inputs
